@@ -1,0 +1,26 @@
+title: C2 Lab Post-Exploitation Command Patterns
+id: 5a1c2b90-0002-4c2f-9e01-c2lab0000002
+status: experimental
+description: Beacon bajaradigan discovery komandalarining Windows Event Log (Sysmon EID 1) belgilari.
+logsource:
+  product: windows
+  service: sysmon
+detection:
+  selection_img:
+    EventID: 1
+    Image|endswith:
+      - '\whoami.exe'
+      - '\tasklist.exe'
+      - '\systeminfo.exe'
+      - '\ipconfig.exe'
+      - '\net.exe'
+  condition: selection_img
+falsepositives:
+  - ma'muriy skriptlar
+level: low
+tags:
+  - attack.discovery
+  - attack.t1087
+  - attack.t1057
+  - attack.t1082
+  - attack.t1016
